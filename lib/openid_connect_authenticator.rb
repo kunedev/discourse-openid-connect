@@ -90,7 +90,11 @@ class OpenIDConnectAuthenticator < Auth::ManagedAuthenticator
                       verbose_logger: lambda { |message| oidc_log(message) },
                       setup:
                         lambda { |env|
+
                           opts = env["omniauth.strategy"].options
+
+                     #     opts[:authorize_params] = { state: "#{SecureRandom.hex(16)}|#{env['HTTP_HOST']}" } # SEAN - 
+                     #     opts[:client_options][:redirect_uri] = "http://localhost:5002"         # SEAN 
 
                           token_params = {}
                           token_params[

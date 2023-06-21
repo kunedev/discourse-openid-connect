@@ -216,7 +216,9 @@ module ::OmniAuth
       private
 
       def callback_url
-        full_host + script_name + callback_path
+#        full_host + script_name + callback_path    #sean (commented out)
+         "http://localhost:5002/"                   #sean
+         
       end
 
       def get_token_options
