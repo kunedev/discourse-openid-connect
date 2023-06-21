@@ -85,6 +85,10 @@ module ::OmniAuth
         super
       end
 
+      def finalvalidation_url     #sean (the ultimate url to redirect the login session to)
+          full_host + script_name + callback_path   
+      end
+
       def authorize_params
         super.tap do |params|
           options[:passthrough_authorize_options].each do |k|
@@ -95,6 +99,10 @@ module ::OmniAuth
 
           params[:scope] = options[:scope]
           session["omniauth.nonce"] = params[:nonce] = SecureRandom.hex(32)
+
+          # Generate state by appending current host to the random value      # Sean - added to append site callback url to state. 
+          params[:state] = "#{SecureRandom.hex(24)}_#{finalvalidation_url}"
+          session["omniauth.state"] = params[:state]
 
           options[:passthrough_token_options].each do |k|
             session["omniauth.param.#{k}"] = request.params[k.to_s] unless [nil, ""].include?(
@@ -218,7 +226,6 @@ module ::OmniAuth
       def callback_url
 #        full_host + script_name + callback_path    #sean (commented out)
          "http://localhost:5002/"                   #sean
-         
       end
 
       def get_token_options
