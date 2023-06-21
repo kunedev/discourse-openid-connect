@@ -85,7 +85,7 @@ module ::OmniAuth
         super
       end
 
-      def finalvalidation_url     #sean (the ultimate url to redirect the login session to)
+      def finalvalidation_url     #sean (define the ultimate url to redirect the login session to)
           full_host + script_name + callback_path   
       end
 
@@ -224,8 +224,8 @@ module ::OmniAuth
       private
 
       def callback_url
-#        full_host + script_name + callback_path    #sean (commented out)
-         "http://localhost:5002/"                   #sean
+#        full_host + script_name + callback_path    #sean (commented out; we no longer want to redirect *directly* back to same site)
+         "https://validator.kune.co/"                   #sean - added this in - we now want ADB2C to direct to this website. 
       end
 
       def get_token_options
