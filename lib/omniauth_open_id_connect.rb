@@ -225,7 +225,7 @@ module ::OmniAuth
 
       def callback_url
 #        full_host + script_name + callback_path    #sean (commented out; we no longer want to redirect *directly* back to same site)
-         "https://validator.kune.co/"                   #sean - added this in - we now want ADB2C to direct to this website. 
+         "https://validator.kune.co/verify"                   #sean - added this in - we now want to direct to this website. 
       end
 
       def get_token_options
