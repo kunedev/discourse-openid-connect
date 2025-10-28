@@ -101,7 +101,8 @@ module ::OmniAuth
           session["omniauth.nonce"] = params[:nonce] = SecureRandom.hex(32)
 
           # Generate state by appending current host to the random value      # Sean - added to append site callback url to state. 
-          params[:state] = "#{SecureRandom.hex(24)}_#{finalvalidation_url}"
+          # OLD:  params[:state] = "#{SecureRandom.hex(24)}_#{finalvalidation_url}"
+          params[:state] = "#{SecureRandom.hex(24)}~kca-forum~#{finalvalidation_url}"
           session["omniauth.state"] = params[:state]
 
           options[:passthrough_token_options].each do |k|
